@@ -1,8 +1,8 @@
 import type React from "react";
 import { useState } from "react";
-import type { Event, Side } from "../../types";
+import type { Event, Side, EventOptions } from "../../types";
 import Button from "../Buttons/Button";
-import css from "./EventsCard.module.css";
+import css from "./EventsCard.module.scss";
 
 interface EventsCardProps {
   event: Event;
@@ -14,13 +14,11 @@ const EventsCard: React.FC<EventsCardProps> = ({
   displayAmount = 1000,
 }) => {
   const [, setSide] = useState<Side | null>(null);
+  const [, setOption] = useState<EventOptions | null>(null);
 
   const calPayout = (amount: number, price: number) => {
     return Math.floor((amount * 100) / price);
   };
-
-  const yesAmount = calPayout(displayAmount, event.prices.yes);
-  const noAmount = calPayout(displayAmount, event.prices.no);
 
   return (
     <div className={css.card}>
@@ -31,18 +29,41 @@ const EventsCard: React.FC<EventsCardProps> = ({
       <div className={css.header}>{event.question}</div>
 
       <div className={css.payouts}>
-        <p>Invest: ₦{displayAmount}</p>
-        <p>YES payout: ₦{yesAmount}</p>
-        <p>NO payout: ₦{noAmount}</p>
+        <p>Deposit: ₦{displayAmount}</p>
       </div>
 
-      <div className={css.buttonGroup}>
-        <Button size="small" color="green" onClick={() => setSide("YES")}>
-          YES ₦{event.prices.yes}
-        </Button>
-        <Button size="small" color="red" onClick={() => setSide("NO")}>
-          NO ₦{event.prices.no}
-        </Button>
+      <div className={css.optionsContainer}>
+        {event.eventOptions.map((option) => (
+          <div key={option.id} className={css.optionCard}>
+            {option.title && <p className={css.optionName}>{option.title}</p>}
+            <div className={css.buttonGroup}>
+              <Button
+                size="small"
+                color="green"
+                onClick={() => {
+                  setSide("YES");
+                  setOption(option);
+                }}
+              >
+                YES ₦{option.yesPrice}
+              </Button>
+              <Button
+                size="small"
+                color="red"
+                onClick={() => {
+                  setSide("NO");
+                  setOption(option);
+                }}
+              >
+                NO ₦{option.noPrice}
+              </Button>
+            </div>
+            <div className={css.payouts}>
+              <p>YES: ₦{calPayout(displayAmount, option.yesPrice)}</p>
+              <p>NO: ₦{calPayout(displayAmount, option.noPrice)}</p>
+            </div>
+          </div>
+        ))}
       </div>
 
       <div className={css.status}>

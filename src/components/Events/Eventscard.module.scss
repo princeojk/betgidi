@@ -1,0 +1,33 @@
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  max-width: 280px;
+  min-width: 200px;
+}
+
+.cardImage {
+  width: 30%;
+  height: 50px;           
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.buttonGroup button {
+  font-size: 0.85rem;
+  min-width: 0;
+}
+
+.payouts {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 0.5rem;
+}
+

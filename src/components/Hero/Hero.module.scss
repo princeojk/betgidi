@@ -1,11 +1,7 @@
 .heroContainer {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  overflow: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
 }
 
 .authButtons {
@@ -17,17 +13,9 @@
   z-index: 10;
 }
 
-.mainContent {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
 .mainText {
   margin-bottom: 2rem;
-  margin-top: 5rem;
+  margin-top: 3rem;
   margin-left: 0.8rem;
   text-align: left;
 
@@ -48,29 +36,6 @@
     animation: gradientShift 3s ease infinite;
   }
 
-  h2 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin: 0;
-    color: #00ff88;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    text-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
-    position: relative;
-
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, #00ff88, #ff6b35);
-      border-radius: 2px;
-      animation: pulse 2s ease-in-out infinite;
-    }
-  }
-
   /* Mobile responsive */
   @media (max-width: 768px) {
     text-align: center;
@@ -80,25 +45,15 @@
       font-size: 2.5rem;
       letter-spacing: 1px;
     }
-
-    h2 {
-      font-size: 1.4rem;
-      letter-spacing: 2px;
-    }
   }
 
   @media (max-width: 480px) {
     h1 {
       font-size: 2rem;
     }
-
-    h2 {
-      font-size: 1.2rem;
-    }
   }
 }
 
-/* Keyframe animations */
 @keyframes gradientShift {
   0% {
     background-position: 0% 50%;
@@ -120,106 +75,5 @@
   50% {
     opacity: 0.7;
     transform: scaleX(1.05);
-  }
-}
-
-.mainButtons {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-start;
-  margin-left: 0.8rem;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-.lowSection {
-  display: flex;
-  flex-direction: row;
-  width: 100vw;
-  min-height: 50vh;
-  background-color: #2d3748;
-}
-
-.heroImage {
-  display: flex;
-  width: 50%;
-  height: 100%;
-  object-fit: fill;
-  min-height: 50vh;
-  float: right;
-}
-
-.referralContent {
-  flex: 1;
-  padding: 2rem 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.referralText {
-  text-align: left;
-  color: white;
-}
-
-.referralTitle {
-  font-size: 2.5rem;
-  font-weight: 900;
-  margin: 0;
-  background: linear-gradient(45deg, #ff6b35, #f7931e);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.referralSubtitle {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 0.5rem 0;
-  color: #ffd700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.cashAmount {
-  font-size: 4rem;
-  font-weight: 900;
-  color: #00ff88;
-  text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
-  margin: 1rem 0;
-  font-family: "Arial Black", sans-serif;
-}
-
-.referralDescription {
-  font-size: 1.1rem;
-  color: #e2e8f0;
-  margin: 1rem 0 2rem 0;
-  font-weight: 500;
-}
-
-.referralCTA {
-  margin-top: 1rem;
-}
-
-.heroImage {
-  flex: 1;
-  height: 50vh;
-  object-fit: cover;
-}
-
-/* Mobile responsive */
-@media (max-width: 768px) {
-  .lowSection {
-    flex-direction: column;
-  }
-
-  .referralTitle {
-    font-size: 2rem;
-  }
-
-  .cashAmount {
-    font-size: 3rem;
   }
 }
