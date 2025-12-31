@@ -4,6 +4,7 @@ import type { Event, EventOptions, Side } from "../../types";
 import Button from "../Buttons/Button";
 import Input from "../Input/Input";
 import { payoutReducer } from "./tradeModal.reducer";
+import AccountBalance from "../AccountBalance/AccountBalance";
 
 interface modalProps {
   event: Event;
@@ -80,13 +81,13 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option }) => {
             Trade Amount:
           </Input>
         </div>
-        <div className={css.balance}>
-          <p>Balance:</p>
-        </div>
         <div className={css.payout}>
           <p>
             Potential payout if {state.selectedSide} wins: {state.payout}
           </p>
+        </div>
+        <div className={css.balance}>
+          <AccountBalance />
         </div>
       </div>
     </div>
