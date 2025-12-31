@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useReducer } from "react";
 import css from "./tradeModal.module.scss";
 import type { Event, EventOptions, Side } from "../../types";
-import { calPayout } from "../../utils/calculatePayout";
 import Button from "../Buttons/Button";
 import Input from "../Input/Input";
+import { payoutReducer } from "./tradeModal.reducer";
 
 interface modalProps {
   event: Event;
@@ -12,26 +12,13 @@ interface modalProps {
 }
 
 const TradeModal: React.FC<modalProps> = ({ event, side, option }) => {
-  const [selectedSide, setSelectedSide] = useState(side);
-  const [payout, setPayout] = useState(0);
-  const [inputAmount, setInputAmount] = useState(0);
-
-  const handleOnchange = (amount: React.ChangeEvent<HTMLInputElement>) => {
-    setInputAmount(Number(amount.target.value));
-  };
-
-  const displayPayout = () => {
-    const price = selectedSide === "YES" ? option.yesPrice : option.noPrice;
-    const payout = calPayout(inputAmount, price);
-    setPayout(payout);
-  };
-
-  useEffect(displayPayout, [
-    inputAmount,
-    selectedSide,
-    option.yesPrice,
-    option.noPrice,
-  ]);
+  const price = side === "YES" ? option.yesPrice : option.noPrice;
+  const [state, dispatch] = useReducer(payoutReducer, {
+    selectedSide: side,
+    payout: 0,
+    inputPayload: 0,
+    price: price,
+  });
 
   return (
     <div className={css.modalContainer}>
@@ -44,34 +31,34 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option }) => {
             size="small"
             color="green"
             onClick={() => {
-              setSelectedSide("YES");
+              dispatch({
+                type: "selectSide",
+                selectedSide: "YES",
+                price: option.yesPrice,
+                inputPayload: state.inputPayload,
+              });
             }}
           >
             <div>
               <p>YES</p>
-              <p>
-                ₦
-                {event.eventOptions.map((option) => {
-                  return option.yesPrice;
-                })}
-              </p>
+              <p>₦{option.yesPrice}</p>
             </div>
           </Button>
           <Button
             size="small"
             color="pink"
             onClick={() => {
-              setSelectedSide("NO");
+              dispatch({
+                type: "selectSide",
+                selectedSide: "NO",
+                price: option.noPrice,
+                inputPayload: state.inputPayload,
+              });
             }}
           >
             <div>
               <p>NO</p>
-              <p>
-                ₦
-                {event.eventOptions.map((option) => {
-                  return option.noPrice;
-                })}
-              </p>
+              <p>₦{option.noPrice}</p>
             </div>
           </Button>
         </div>
@@ -82,14 +69,23 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option }) => {
             containerSize="small"
             color="black"
             layout="horizontal"
-            onChange={handleOnchange}
+            onChange={(e) => {
+              dispatch({
+                type: "calPayout",
+                price: state.price,
+                inputPayload: Number(e.target.value),
+              });
+            }}
           >
             Trade Amount:
           </Input>
         </div>
-        <div>
+        <div className={css.balance}>
+          <p>Balance:</p>
+        </div>
+        <div className={css.payout}>
           <p>
-            Potential payout if {selectedSide} wins: {payout}
+            Potential payout if {state.selectedSide} wins: {state.payout}
           </p>
         </div>
       </div>
