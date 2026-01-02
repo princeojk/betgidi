@@ -3,12 +3,13 @@ body {
 }
 
 .mainNavbar {
-  color: blue($color: #000000);
+  color: rgb(5, 5, 19);
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   gap: 2rem;
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
+  background-color: antiquewhite;
 }
 
 .mainNavbar ul {
@@ -33,5 +34,5 @@ body {
 }
 
 .active {
-  background-color: #555;
+  background-color: rgb(242, 165, 64);
 }

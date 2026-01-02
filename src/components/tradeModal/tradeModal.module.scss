@@ -11,10 +11,13 @@
 }
 
 .modalContent {
+  display: flex;
+  flex-direction: column;
   background-color: white;
   border-radius: 12px;
   width: 30rem;
   text-align: center;
+  align-items: center;
 }
 
 .eventQuestion {
@@ -26,8 +29,8 @@
 
 .buttonGroup {
   display: flex;
-  justify-content: space-between;
   padding: 1rem 5rem;
+  gap: 4rem;
 
   @media (max-width: 768px) {
     justify-content: center;
@@ -48,4 +51,11 @@
 
 .balance {
   margin-left: 1rem;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 1rem;
 }

@@ -10,9 +10,10 @@ interface modalProps {
   event: Event;
   side: Side;
   option: EventOptions;
+  onClose: () => void;
 }
 
-const TradeModal: React.FC<modalProps> = ({ event, side, option }) => {
+const TradeModal: React.FC<modalProps> = ({ event, side, option, onClose }) => {
   const price = side === "YES" ? option.yesPrice : option.noPrice;
   const [state, dispatch] = useReducer(payoutReducer, {
     selectedSide: side,
@@ -20,6 +21,10 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option }) => {
     inputPayload: 0,
     price: price,
   });
+
+  const handleTrade = () => {
+    console.log("trade handled");
+  };
 
   return (
     <div className={css.modalContainer}>
@@ -88,6 +93,10 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option }) => {
         </div>
         <div className={css.balance}>
           <AccountBalance />
+        </div>
+        <div className={css.actions}>
+          <Button onClick={handleTrade}>Trade</Button>
+          <Button onClick={onClose}>Cancel</Button>
         </div>
       </div>
     </div>

@@ -109,9 +109,10 @@ function Hero() {
     setModalData({ event, option, side });
   };
 
-  // const closeTradeModal = () => {
-  //   setModalData({ event: null, option: null, side: null });
-  // };
+  const closeTradeModal = () => {
+    setModalData({ event: null, option: null, side: null });
+  };
+
   return (
     <>
       <div className={css.heroContainer}>
@@ -123,6 +124,7 @@ function Hero() {
             event={modalData.event}
             side={modalData.side}
             option={modalData.option}
+            onClose={closeTradeModal}
           />
         )}
       </div>
