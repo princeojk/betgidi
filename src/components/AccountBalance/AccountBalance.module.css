@@ -1,8 +1,15 @@
+.balanceFund {
+  display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: space-between;
+}
+
 .accountBalance {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 1rem 1.5rem;
+  padding: 1rem .2rem;
   border-radius: 12px;
 }
 
@@ -14,7 +21,7 @@
   text-transform: uppercase;
 }
 
-.balance {
+.balanceAmount {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 700;

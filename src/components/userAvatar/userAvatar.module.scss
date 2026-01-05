@@ -1,0 +1,32 @@
+.userAvatarContainer {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  width: 100%;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ff6b35;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+}
+
+.fullName {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.fullName p {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}

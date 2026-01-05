@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 
 export const navBarContext = createContext<string | undefined>(undefined);
 
-export const useNavBarContext: string = () => {
+export const useNavBarContext = () => {
   const user = useContext(navBarContext);
 
   if (user === undefined) {

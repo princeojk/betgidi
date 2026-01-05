@@ -1,10 +1,11 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import css from "./tradeModal.module.scss";
 import type { Event, EventOptions, Side } from "../../types";
 import Button from "../Buttons/Button";
 import Input from "../Input/Input";
 import { payoutReducer } from "./tradeModal.reducer";
 import AccountBalance from "../AccountBalance/AccountBalance";
+import DepositModal from "../../depositModal/DepositModal";
 
 interface modalProps {
   event: Event;
@@ -21,9 +22,18 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option, onClose }) => {
     inputPayload: 0,
     price: price,
   });
+  const [tradeModal, setTradeModal] = useState(false);
 
   const handleTrade = () => {
     console.log("trade handled");
+  };
+
+  const openDepositModal = (e: boolean) => {
+    setTradeModal(e);
+  };
+
+  const handleOnClose = () => {
+    setTradeModal(false);
   };
 
   return (
@@ -92,13 +102,18 @@ const TradeModal: React.FC<modalProps> = ({ event, side, option, onClose }) => {
           </p>
         </div>
         <div className={css.balance}>
-          <AccountBalance />
+          <AccountBalance onOpenModel={openDepositModal} />
         </div>
         <div className={css.actions}>
           <Button onClick={handleTrade}>Trade</Button>
           <Button onClick={onClose}>Cancel</Button>
         </div>
       </div>
+      {tradeModal && (
+        <div className={css.depositModal}>
+          <DepositModal onClose={handleOnClose} />
+        </div>
+      )}
     </div>
   );
 };
